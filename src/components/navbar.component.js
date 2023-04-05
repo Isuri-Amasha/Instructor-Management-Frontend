@@ -11,7 +11,6 @@ function navbar() {
           <a href="/payment" className="m-2 text-black no-underline duration-300 hover:text-blue-800 hover:font-normal">Payment</a>
           <a href="/feedback" className="m-2 text-black no-underline duration-300 hover:text-blue-800 hover:font-normal">Feedbacks</a>
           <a href="/idetails" className="m-2 text-black no-underline duration-300 hover:text-blue-800 hover:font-normal">Instructor Details</a>
-          
         </div>
         <div className="grid grid-cols-2 gap-1">
           <div class="flex flex-col sm:flex-row sm:text-left sm:justify-between">
