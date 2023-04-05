@@ -16,8 +16,8 @@ const Instructor = props => (
         <td className='px-6 py-4 '>{props.instructor.email}</td>
         <td className='px-6 py-4 '>{props.instructor.address}</td>
         <td className='px-6 py-4 '>{props.instructor.position}</td>
-        <td className='px-6 py-4 '>{props.instructor.password}</td>
-        <td className='px-6 py-4 '>{props.instructor.cpassword}</td>
+        {/* <td className='px-6 py-4 '>{props.instructor.password}</td>
+        <td className='px-6 py-4 '>{props.instructor.cpassword}</td> */}
         <td className='px-6 py-4 '>
             <div class="flex justify-center">
                 <div class="">
@@ -108,11 +108,20 @@ export class InstructorList extends Component {
                         console.log(response.data)
                         this.refreshTable();
                     })
-
                     Swal.fire({
                         icon: 'success',
                         title: 'Successful',
                         text: "User has been deleted!!",
+                        background: '#fff',
+                        confirmButtonColor: '#333533',
+                        iconColor: '#60e004'
+                    })
+                }
+                else {
+                    Swal.fire({
+                        icon: 'Unsuccess',
+                        title: 'Unsuccessfull',
+                        text: "User has not been deleted!!",
                         background: '#fff',
                         confirmButtonColor: '#333533',
                         iconColor: '#60e004'
@@ -143,14 +152,14 @@ export class InstructorList extends Component {
                         <td className='px-6 py-4'>{currentinstructor.email}</td>
                         <td className='px-6 py-4'>{currentinstructor.address}</td>
                         <td className='px-6 py-4'>{currentinstructor.position}</td>
-                        <td className='px-6 py-4'>{currentinstructor.password}</td>
-                        <td className='px-6 py-4'>{currentinstructor.cpassword}</td>
+                        {/* <td className='px-6 py-4'>{currentinstructor.password}</td>
+                        <td className='px-6 py-4'>{currentinstructor.cpassword}</td> */}
                         <td className='px-6 py-4'>
                             <div class="flex justify-center">
                                 <div class="">
                                     {
-                                        <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' 
-                                        onClick={() => { this.gotoUpdateInstructor(currentinstructor._id) }}>
+                                        <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200'
+                                            onClick={() => { this.gotoUpdateInstructor(currentinstructor._id) }}>
                                             <div class="">
                                                 <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
@@ -235,8 +244,8 @@ export class InstructorList extends Component {
                 Instructor.email,
                 Instructor.address,
                 Instructor.position,
-                Instructor.password,
-                Instructor.cpassword,
+                // Instructor.password,
+                // Instructor.cpassword,
             ]
         );
 
@@ -319,8 +328,8 @@ export class InstructorList extends Component {
                                             <th className="p-2 tbhead">Email</th>
                                             <th className="p-2 tbhead">Address</th>
                                             <th className="p-2 tbhead">Position</th>
-                                            <th className="p-2 tbhead">Password</th>
-                                            <th className="p-2 tbhead">Confirm Password</th>
+                                            {/* <th className="p-2 tbhead">Password</th>
+                                            <th className="p-2 tbhead">Confirm Password</th> */}
                                             <th className="p-2 text-center tbhead">Actions</th>
                                         </tr>
                                     </thead>
@@ -330,7 +339,7 @@ export class InstructorList extends Component {
                                 </table>
                             </div>
                             <div class="">
-                                <Modal  show={this.state.show} onHide={this.closeModalBox} centered size={"xl"}>
+                                <Modal show={this.state.show} onHide={this.closeModalBox} centered size={"xl"}>
                                     <Modal.Header className='px-5 pt-4 border-2 shadow-md bg-gray-50' closeButton>
                                         <div class="">
                                             <Modal.Title className='items-center' >

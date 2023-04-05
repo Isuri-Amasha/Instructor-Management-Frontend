@@ -242,7 +242,7 @@ export default class EditInstructor extends Component {
                                                 <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
                                                     Contact Number :
                                                 </label>
-                                                <textarea type="text"
+                                                <input type="text"
                                                     required
                                                     className="form-control"
                                                     value={contactNo}
@@ -253,7 +253,7 @@ export default class EditInstructor extends Component {
                                                 <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
                                                     Email :
                                                 </label>
-                                                <textarea type="email"
+                                                <input type="email"
                                                     required
                                                     className="form-control"
                                                     value={email}
@@ -289,6 +289,7 @@ export default class EditInstructor extends Component {
                                                     Passowrd :
                                                 </label>
                                                 <input
+                                                    disabled
                                                     type="password"
                                                     required
                                                     className="form-control"
@@ -301,6 +302,7 @@ export default class EditInstructor extends Component {
                                                     Confirm Passowrd :
                                                 </label>
                                                 <input
+                                                    disabled
                                                     type="password"
                                                     required
                                                     className="form-control"
