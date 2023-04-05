@@ -190,234 +190,128 @@ export default class EditInstructor extends Component {
     render() {
         const { fullName, nic, dob, contactNo, email, address, position, password, cpassword } = this.state
         return (
-            <div>
-                {/* <div className="formdiv">
-
-                    <h3 className="billheading">Edit Instructor</h3>
-                    <form onSubmit={this.onSubmit}>
-
-
-                        <div className="form-group">
-                            <label>Full Name : </label>
-                            <input type="text"
-                                required
-                                className="form-control"
-                                value={fullName}
-                                onChange={this.onChangefullName}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label>NIC : </label>
-                            <input type="text"
-                                required
-                                className="form-control"
-                                value={nic}
-                                onChange={this.onChangenic}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label>DOB : </label>
-                            <div>
-                                <DatePicker
-                                    selected={dob}
-                                    onChange={this.onChangedob}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="form-group">
-                            <label>Contact : </label>
-                            <input type="text"
-                                required
-                                className="form-control"
-                                value={contactNo}
-                                onChange={this.onChangecontactNo}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label>Email : </label>
-                            <input type="text"
-                                required
-                                className="form-control"
-                                value={email}
-                                onChange={this.onChangeemail}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label>Address : </label>
-                            <input type="text"
-                                required
-                                className="form-control"
-                                value={address}
-                                onChange={this.onChangeaddress}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Position : </label>
-                            <input type="text"
-                                required
-                                className="form-control"
-                                value={position}
-                                onChange={this.onChangeposition}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Passowrd : </label>
-                            <input type="password"
-                                required
-                                className="form-control"
-                                value={password}
-                                onChange={this.onChangepassword}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label>Confirm Passowrd : </label>
-                            <input type="password"
-                                required
-                                className="form-control"
-                                value={cpassword}
-                                onChange={this.onChangecpassword}
-                            />
-                        </div>
-
-
-                        <div className="form-group">
-                            <input type="submit" value="Edit Instructor" />
-                        </div>
-                    </form>
-
-
-                </div> */}
-
-
-                <div className="flex flex-col px-5">
-                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div className="inline-block min-w-full sm:px-6 lg:px-8">
-                            <div className='items-center overflow-hidden'>
-                                <div className=''>
-                                    <div class="grid grid-cols-1 gap-4 content-start px-10">
-                                        <div className="formdiv">
-                                            <form className='' onSubmit={this.onSubmit}>
-                                                <div class="grid grid-cols-2 gap-4 form-group">
-                                                    <div className="form-group">
-                                                        <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                            Full Name :
-                                                        </label>
-                                                        <input type="text"
-                                                            // required
-                                                            className="form-control"
-                                                            value={fullName}
-                                                            onChange={this.onChangefullName}
-                                                        /><p />
-                                                    </div>
-
-                                                </div>
-                                                <div class="grid grid-cols-2 gap-4 form-group">
-                                                    <div className="form-group">
-                                                        <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                            NIC :
-                                                        </label>
-                                                        <input type="text"
-                                                            required
-                                                            className="form-control"
-                                                            value={nic}
-                                                            onChange={this.onChangenic}
-                                                        />
-                                                        <p />
-                                                    </div>
-                                                    <div className="form-group">
-                                                        <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                            Date of birth :
-                                                        </label>
-                                                        <DatePicker
-                                                            type="date"
-                                                            className="text-lg text-gray-900'"
-                                                            selected={dob}
-                                                            onChange={this.onChangedob}
-                                                        /><p />
-                                                    </div>
-                                                </div>
-
+            <div className="flex flex-col px-5">
+                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div className="inline-block min-w-full sm:px-6 lg:px-8">
+                        <div className='items-center overflow-hidden'>
+                            <div className=''>
+                                <div class="grid grid-cols-1 gap-4 content-start px-10">
+                                    <div className="formdiv">
+                                        <form className='' onSubmit={this.onSubmit}>
+                                            <div class="grid grid-cols-2 gap-4 form-group">
                                                 <div className="form-group">
-                                                    <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Contact Number :
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
+                                                        Full Name :
                                                     </label>
-                                                    <textarea type="text"
-                                                        required
+                                                    <input type="text"
+                                                        // required
                                                         className="form-control"
-                                                        value={contactNo}
-                                                        onChange={this.onChangecontactNo}
+                                                        value={fullName}
+                                                        onChange={this.onChangefullName}
                                                     /><p />
                                                 </div>
+
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-4 form-group">
                                                 <div className="form-group">
-                                                    <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Email :
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
+                                                        NIC :
                                                     </label>
-                                                    <textarea type="email"
+                                                    <input type="text"
                                                         required
                                                         className="form-control"
-                                                        value={email}
-                                                        onChange={this.onChangeemail}
-                                                    /><p />
+                                                        value={nic}
+                                                        onChange={this.onChangenic}
+                                                    />
+                                                    <p />
                                                 </div>
                                                 <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
-                                                        Address :
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
+                                                        Date of birth :
                                                     </label>
-                                                    <input
-                                                        type="text"
-                                                        required
-                                                        className="form-control"
-                                                        value={address}
-                                                        onChange={this.onChangeaddress}
+                                                    <DatePicker
+                                                        type="date"
+                                                        className="text-lg text-gray-900'"
+                                                        selected={dob}
+                                                        onChange={this.onChangedob}
                                                     /><p />
                                                 </div>
-                                                <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
-                                                        Position :
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        required
-                                                        className="form-control"
-                                                        value={position}
-                                                        onChange={this.onChangeposition}
-                                                    /><p />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
-                                                        Passowrd :
-                                                    </label>
-                                                    <input
-                                                        type="password"
-                                                        required
-                                                        className="form-control"
-                                                        value={password}
-                                                        onChange={this.onChangepassword}
-                                                    /><p />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
-                                                        Confirm Passowrd :
-                                                    </label>
-                                                    <input
-                                                        type="password"
-                                                        required
-                                                        className="form-control"
-                                                        value={cpassword}
-                                                        onChange={this.onChangecpassword}
-                                                    /><p />
-                                                </div>
-                                                <div className="text-center align-middle form-group">
-                                                    <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Update Instructor" />
-                                                </div>
-                                            </form>
-                                        </div>
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
+                                                    Contact Number :
+                                                </label>
+                                                <textarea type="text"
+                                                    required
+                                                    className="form-control"
+                                                    value={contactNo}
+                                                    onChange={this.onChangecontactNo}
+                                                /><p />
+                                            </div>
+                                            <div className="form-group">
+                                                <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
+                                                    Email :
+                                                </label>
+                                                <textarea type="email"
+                                                    required
+                                                    className="form-control"
+                                                    value={email}
+                                                    onChange={this.onChangeemail}
+                                                /><p />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
+                                                    Address :
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    className="form-control"
+                                                    value={address}
+                                                    onChange={this.onChangeaddress}
+                                                /><p />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
+                                                    Position :
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    className="form-control"
+                                                    value={position}
+                                                    onChange={this.onChangeposition}
+                                                /><p />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
+                                                    Passowrd :
+                                                </label>
+                                                <input
+                                                    type="password"
+                                                    required
+                                                    className="form-control"
+                                                    value={password}
+                                                    onChange={this.onChangepassword}
+                                                /><p />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
+                                                    Confirm Passowrd :
+                                                </label>
+                                                <input
+                                                    type="password"
+                                                    required
+                                                    className="form-control"
+                                                    value={cpassword}
+                                                    onChange={this.onChangecpassword}
+                                                /><p />
+                                            </div>
+                                            <div className="text-center align-middle form-group">
+                                                <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Update Instructor" />
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

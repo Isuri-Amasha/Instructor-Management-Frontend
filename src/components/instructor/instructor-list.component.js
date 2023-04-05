@@ -9,16 +9,16 @@ import InstructorEdit from "./instructor-edit.component";
 
 const Instructor = props => (
     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
-        <td className='px-6 py-4'>{props.instructor.fullName}</td>
-        <td className='px-6 py-4'>{props.instructor.nic}</td>
-        <td className='px-6 py-4'>{props.instructor.dob.substring(0, 10)}</td>
-        <td className='px-6 py-4'>{props.instructor.contactNo}</td>
-        <td className='px-6 py-4'>{props.instructor.email}</td>
-        <td className='px-6 py-4'>{props.instructor.address}</td>
-        <td className='px-6 py-4'>{props.instructor.position}</td>
-        <td className='px-6 py-4'>{props.instructor.password}</td>
-        <td className='px-6 py-4'>{props.instructor.cpassword}</td>
-        <td>
+        <td className='px-6 py-4 text-base font-medium text-blue-950'>{props.instructor.fullName}</td>
+        <td className='px-6 py-4 text-base font-medium text-blue-950'>{props.instructor.nic}</td>
+        <td className='px-6 py-4 '>{props.instructor.dob.substring(0, 10)}</td>
+        <td className='px-6 py-4 '>{props.instructor.contactNo}</td>
+        <td className='px-6 py-4 '>{props.instructor.email}</td>
+        <td className='px-6 py-4 '>{props.instructor.address}</td>
+        <td className='px-6 py-4 '>{props.instructor.position}</td>
+        <td className='px-6 py-4 '>{props.instructor.password}</td>
+        <td className='px-6 py-4 '>{props.instructor.cpassword}</td>
+        <td className='px-6 py-4 '>
             <div class="flex justify-center">
                 <div class="">
                     <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { props.gotoUpdateInstructor(props.instructor._id) }}>
@@ -136,8 +136,8 @@ export class InstructorList extends Component {
             ) {
                 return (
                     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
-                        <td className='px-6 py-4'>{currentinstructor.fullName}</td>
-                        <td className='px-6 py-4'>{currentinstructor.nic}</td>
+                        <td className='px-6 py-4 text-base font-medium text-blue-950'>{currentinstructor.fullName}</td>
+                        <td className='px-6 py-4 text-base font-medium text-blue-950'>{currentinstructor.nic}</td>
                         <td className='px-6 py-4'>{currentinstructor.dob}</td>
                         <td className='px-6 py-4'>{currentinstructor.contactNo}</td>
                         <td className='px-6 py-4'>{currentinstructor.email}</td>
@@ -149,7 +149,8 @@ export class InstructorList extends Component {
                             <div class="flex justify-center">
                                 <div class="">
                                     {
-                                        <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { this.gotoUpdateInstructor(currentinstructor._id) }}>
+                                        <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' 
+                                        onClick={() => { this.gotoUpdateInstructor(currentinstructor._id) }}>
                                             <div class="">
                                                 <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
@@ -320,7 +321,7 @@ export class InstructorList extends Component {
                                             <th className="p-2 tbhead">Position</th>
                                             <th className="p-2 tbhead">Password</th>
                                             <th className="p-2 tbhead">Confirm Password</th>
-                                            <th className="p-2 tbhead">Actions</th>
+                                            <th className="p-2 text-center tbhead">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>

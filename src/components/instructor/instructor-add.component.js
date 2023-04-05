@@ -209,7 +209,6 @@ export class CreateInstructor extends Component {
                                                         onChange={this.onChangenic}
                                                     />
                                                 </div>
-
                                             </div>
 
                                             <div className="grid grid-cols-2 gap-4 form-group">
@@ -220,7 +219,7 @@ export class CreateInstructor extends Component {
                                                     </label>
                                                     <div>
                                                         <DatePicker
-                                                            className=''
+                                                            viewBox="0 0 20 40"
                                                             selected={this.state.dob}
                                                             onChange={this.onChangedob}
                                                         />
