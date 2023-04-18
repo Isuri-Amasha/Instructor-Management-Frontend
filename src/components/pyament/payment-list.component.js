@@ -98,34 +98,36 @@ export class PaymentList extends Component {
     // }
 
     deletePayment(id) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Are you sure?',
-            text: "Once deleted, you will not be able to recover this record!",
-            background: '#fff',
-            confirmButtonColor: '#454545',
-            iconColor: '#ffc200',
-            showCancelButton: true,
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete'
-        })
-            .then((willDelete) => {
-                if (willDelete.isConfirmed) {
-                    axios.delete('http://localhost:5000/payment/' + id).then(response => {
-                        console.log(response.data)
-                        this.refreshTable();
-                    })
+        axios.delete('http://localhost:5000/payment/' + id).then(response => {
+            console.log(response.status)
+            // this.refreshTable();
 
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successful',
-                        text: "User has been deleted!!",
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#60e004'
-                    })
-                }
-            });
+            if(response.status == 200){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successful',
+                    text: "Payment has been deleted!!",
+                    background: '#fff',
+                    confirmButtonColor: '#0a5bf2',
+                    iconColor: '#60e004'
+                })
+
+               
+            }
+            
+            else {
+                Swal.fire({
+                    icon: 'Unsuccess',
+                    title: 'Unsuccessfull',
+                    text: "Payment has not been deleted!!",
+                    background: '#fff',
+                    confirmButtonColor: '#eb220c',
+                    iconColor: '#60e004'
+                })
+            }
+
+            this.refreshTable();
+        })
     }
 
     paymentList() {
@@ -170,33 +172,8 @@ export class PaymentList extends Component {
                                         <button
                                             className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-red-500 rounded-md hover:bg-red-200'
                                             onClick={() => {
-                                                Swal.fire({
-                                                    icon: 'warning',
-                                                    title: 'Are you sure?',
-                                                    text: "Once deleted, you will not be able to recover this record!",
-                                                    background: '#fff',
-                                                    confirmButtonColor: '#454545',
-                                                    iconColor: '#ffc200',
-                                                    showCancelButton: true,
-                                                    cancelButtonColor: '#d33',
-                                                    confirmButtonText: 'Delete'
-                                                })
-                                                    .then((willDelete) => {
-                                                        if (willDelete.isConfirmed) {
-                                                            axios.delete('http://localhost:5000/payment/' + currentpayment._id).then(response => {
-                                                                console.log(response.data)
-                                                                this.refreshTable();
-                                                            })
-                                                            Swal.fire({
-                                                                icon: 'success',
-                                                                title: 'Successful',
-                                                                text: "User has been deleted!!",
-                                                                background: '#fff',
-                                                                confirmButtonColor: '#333533',
-                                                                iconColor: '#60e004'
-                                                            })
-                                                        }
-                                                    });
+                                               this.deletePayment(currentpayment._id)
+
                                             }}
                                         >
                                             Delete
@@ -285,7 +262,7 @@ export class PaymentList extends Component {
                                                 <input
                                                     className="border-2 border-blue-700 font-semibold form-control rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
                                                     type="text"
-                                                    placeholder="Search by Instructor NIC"
+                                                    placeholder="Search by Bank"
                                                     aria-label="Search"
                                                     onChange={(e) => {
                                                         this.setState({

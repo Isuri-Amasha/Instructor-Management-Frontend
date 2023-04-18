@@ -13,6 +13,7 @@ import EditPayment from './components/pyament/payment-edit.component'
 
 import {FeedbackList} from './components/feedback/feedback-list.component'
 import {CreateFeedback} from './components/feedback/feedback-add.component'
+import EditFeedback from './components/feedback/feedback-edit.component'
 
 import {InstructorDetails} from './components/instructor/instructor-details.component'
 function App() {
@@ -33,6 +34,7 @@ function App() {
 
         <Route exact path = "/feedback" element = {<FeedbackList/>}/>
         <Route exact path = "/creatfeedback" element = {<CreateFeedback/>}/>
+        <Route exact path = "/editFeedback/:id" element = {EditFeedback}/>
 
 
         <Route exact path = "/idetails/:id" element = {<InstructorDetails/>}/>

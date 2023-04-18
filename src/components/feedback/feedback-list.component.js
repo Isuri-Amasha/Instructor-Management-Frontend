@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { Modal } from "react-bootstrap";
+import Swal from "sweetalert2";
+import FeedbackEdit from "./feedback-edit.component";
 
 const Feedback = props => (
     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
@@ -11,7 +14,7 @@ const Feedback = props => (
         <td className='px-6 py-4'>
             <div class="flex justify-center">
                 <div class="">
-                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => {  }}>
+                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { props.gotoUpdateFeedback(props.feedback._id) }}>
                         <div class="">
                             <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
@@ -23,7 +26,7 @@ const Feedback = props => (
                     </button>
                 </div>
                 <div class="">
-                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-red-500 rounded-md hover:bg-red-200' onClick={() => {}}>
+                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-red-500 rounded-md hover:bg-red-200' onClick={() => { props.deleteFeedback(props.feedback._id) }}>
                         <div class="">
                             <svg class="h-5 w-5 mr-2 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -42,12 +45,16 @@ const Feedback = props => (
 export class FeedbackList extends Component {
     constructor(props) {
         super(props);
-        // this.deleteInstructor = this.deleteInstructor.bind(this);
-        // this.gotoUpdateInstructor = this.gotoUpdateInstructor.bind(this);
+        this.deleteFeedback = this.deleteFeedback.bind(this);
+        this.gotoUpdateFeedback = this.gotoUpdateFeedback.bind(this);
+        
         this.state = {
             feedback: [], instructor: [],
-            searchFeedback: ""
+            searchFeedback: "",
+            show:''
         };
+
+       
     }
 
     componentDidMount() {
@@ -65,17 +72,57 @@ export class FeedbackList extends Component {
             })
     }
 
-    // gotoUpdateInstructor = (id) => {
-    //     this.setState({
-    //         id: id,
-    //         show: true
+    deleteFeedback(id) {
+        
+        axios.delete('http://localhost:5000/feedback/' + id).then(response => {
+            console.log(response.status)
+            // this.refreshTable();
 
-    //     })
-    //     console.log("LIst id is :" +id);
-    // }
+            if(response.status == 200){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successful',
+                    text: "Feedback has been deleted!!",
+                    background: '#fff',
+                    confirmButtonColor: '#0a5bf2',
+                    iconColor: '#60e004'
+                })
+
+               
+            }
+            
+            else {
+                Swal.fire({
+                    icon: 'Unsuccess',
+                    title: 'Unsuccessfull',
+                    text: "Istructor has not been deleted!!",
+                    background: '#fff',
+                    confirmButtonColor: '#eb220c',
+                    iconColor: '#60e004'
+                })
+            }
+
+            this.refreshTable();
+        })
+        
+
+}
+
+
+    gotoUpdateFeedback = (id) => {
+        this.setState({
+            id: id,
+            show: true
+
+        })
+        console.log("LIst id is :" +id);
+    }
 
     //Modal box
-    // 
+    closeModalBox = () => {
+        this.setState({ show: false })
+        this.refreshTable();
+    }
 
     getInstructors() {
         axios.get('http://localhost:5000/instructor/')
@@ -89,7 +136,7 @@ export class FeedbackList extends Component {
 
     feedbackList() {
         return this.state.feedback.map(currentfeedback => {
-            return <Feedback feedback={currentfeedback} />;
+            return <Feedback feedback={currentfeedback} deleteFeedback={this.deleteFeedback} gotoUpdateFeedback={this.gotoUpdateFeedback} key={currentfeedback._id}/>;
         })
     }
 
@@ -100,9 +147,49 @@ export class FeedbackList extends Component {
                 currentfeedback.instructor
             ) {
                 return (
-                    <tr>
-                        <td style={{ width: "10%" }}>{currentfeedback.feedback}</td>
-                        <td style={{ width: "10%" }}>{currentfeedback.instructor}</td>
+                    <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
+                        <td className='px-6 py-4 text-base font-medium text-blue-950'>{currentfeedback.feedback}</td>
+                        <td className='px-6 py-4 text-base font-medium text-blue-950'>{currentfeedback.instructor}</td>
+                        <td className='px-6 py-4'>
+                            <div class="flex justify-center">
+                                <div class="">
+                                    {
+                                        <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200'
+                                            onClick={() => { this.gotoUpdateFeedback(currentfeedback._id) }}>
+                                            <div class="">
+                                                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="">
+                                                Update
+                                            </div>
+                                        </button>
+                                    }
+                                </div>
+                                {"  "}
+                                <div class="">
+                                    {
+                                        <button
+                                            className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-red-500 rounded-md hover:bg-red-200'
+                                            onClick={() => {
+                                                //Delete the selected record
+                                               this.deleteFeedback(currentfeedback._id)
+                                                
+                                            }}>
+                                            <div class="">
+                                                <svg class="h-5 w-5 mr-2 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </div>
+                                            <div class="">
+                                                Delete
+                                            </div>
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 );
             }
@@ -207,6 +294,22 @@ export class FeedbackList extends Component {
                                         {this.state.searchFeedback == "" ? this.feedbackList() : this.searchFeedbackList()}
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="">
+                                <Modal show={this.state.show} onHide={this.closeModalBox} centered size={"xl"}>
+                                    <Modal.Header className='px-5 pt-4 border-2 shadow-md bg-gray-50' closeButton>
+                                        <div class="">
+                                            <Modal.Title className='items-center' >
+                                                <p className='font-semibold text-black uppercase '>
+                                                    Edit Feedback
+                                                </p>
+                                            </Modal.Title>
+                                        </div>
+                                    </Modal.Header >
+                                    <Modal.Body className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50'>
+                                        <FeedbackEdit feedId={this.state.id} key={this.state.id} close={this.closeModalBox} />
+                                    </Modal.Body>
+                                </Modal>
                             </div>
                         </div>
                     </div>

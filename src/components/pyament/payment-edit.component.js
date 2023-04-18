@@ -39,13 +39,13 @@ export default class EditPayment extends Component {
             })
     }
 
-    handleChange = (e) => {
-        e.preventDefault();
+    // handleChange = (e) => {
+    //     e.preventDefault();
 
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
+    //     this.setState({
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
     onChangebank(e) {
         this.setState({
@@ -70,14 +70,6 @@ export default class EditPayment extends Component {
             branch: e.target.value
         });
     }
-
-    // handleChange = (event) => {
-    //     event.preventDefault();
-
-    //     this.setState({
-    //         [event.target.name]: event.target.value
-    //     })
-    // }
 
     refreshTable() {
         axios.get('http://localhost:5000/payment/')
@@ -112,7 +104,7 @@ export default class EditPayment extends Component {
                         title: 'Successful',
                         text: 'Payment has been Updated!!',
                         background: '#fff',
-                        confirmButtonColor: '#333533',
+                        confirmButtonColor: '#0a5bf2',
                         iconColor: '#60e004'
                     })
                 } else {
@@ -121,7 +113,7 @@ export default class EditPayment extends Component {
                         title: 'Error',
                         text: 'Error in adding!',
                         background: '#fff',
-                        confirmButtonColor: '#333533',
+                        confirmButtonColor: '#eb220c',
                         iconColor: '#e00404'
                     })
                 }
@@ -143,7 +135,7 @@ export default class EditPayment extends Component {
                                             <div class="grid grid-cols-2 gap-4 form-group">
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Bank :
+                                                        Bank
                                                     </label>
                                                     <input type="text"
                                                         required
@@ -157,7 +149,7 @@ export default class EditPayment extends Component {
                                             <div class="grid grid-cols-2 gap-4 form-group">
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Account Number :
+                                                        Account Number
                                                     </label>
                                                     <input type="text"
                                                         required
@@ -169,7 +161,7 @@ export default class EditPayment extends Component {
                                                 </div>
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Name :
+                                                        Name
                                                     </label>
                                                     <input type="text"
                                                         required
@@ -182,9 +174,9 @@ export default class EditPayment extends Component {
 
                                             <div className="form-group">
                                                 <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                    Branch :
+                                                    Branch
                                                 </label>
-                                                <textarea type="text"
+                                                <input type="text"
                                                     required
                                                     className="form-control"
                                                     value={branch}

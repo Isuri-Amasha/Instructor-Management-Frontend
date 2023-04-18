@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import * as Swal from "sweetalert2";
+import Swal from "sweetalert2";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"
 import { Button, Form, Table, ButtonGroup, Modal, Row, Col, InputGroup } from "react-bootstrap";
@@ -108,13 +108,18 @@ export class CreateInstructor extends Component {
 
         console.log(instructor);
 
-        if (this.state.password != this.state.cpassword) {
-            this.setState({ passwordError: "Your Passwords Don't match" })
+        const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+        if(!this.state.email || regex.test(this.state.email) === false){
+            this.setState({ emailError: "Please Enter a valid email." })
+        }
+        else if (this.state.password != this.state.cpassword) {
+            this.setState({ passwordError: "Your Passwords Don't match." })
 
         } else if (this.state.nic.length < 10 || this.state.nic.length > 12) {
-            this.setState({ nicError: "Please Enter a valid NIC Number" })
+            this.setState({ nicError: "Please Enter a valid NIC Number." })
         } else if (this.state.contactNo.length != 10) {
-            this.setState({ contactError: "Please Enter a valid Phone Number" })
+            this.setState({ contactError: "Please Enter a valid Phone Number." })
         }
 
         else {
@@ -133,7 +138,7 @@ export class CreateInstructor extends Component {
                             title: 'Successful',
                             text: 'Instructor has been added!!',
                             background: '#fff',
-                            confirmButtonColor: '#333533',
+                            confirmButtonColor: '#0a5bf2',
                             iconColor: '#60e004'
                         })
 
@@ -143,22 +148,21 @@ export class CreateInstructor extends Component {
                             title: 'Error',
                             text: 'Error in adding!',
                             background: '#fff',
-                            confirmButtonColor: '#333533',
+                            confirmButtonColor: '#eb220c',
                             iconColor: '#e00404'
                         })
                     }
                 }).catch(err => console.log(err))
 
         }
-        // window.location = '/';
-        // }
+       
     }
 
     clearData = () => {
         this.setState({
             fullName: '',
             nic: '',
-            dob: '',
+            dob: new Date(),
             contactNo: '',
             email: '',
             address: '',
@@ -185,7 +189,7 @@ export class CreateInstructor extends Component {
 
                                                 <div class="">
                                                     <label className='block text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Full Name :
+                                                        Full Name
                                                     </label>
                                                     <input
                                                         type="text"
@@ -199,7 +203,7 @@ export class CreateInstructor extends Component {
 
                                                 <div className="form-group">
                                                     <label className='block text-lg font-medium text-gray-900 dark:text-white'>
-                                                        NIC :
+                                                        NIC
                                                     </label>
                                                     <input type="text"
                                                         required
@@ -208,6 +212,7 @@ export class CreateInstructor extends Component {
                                                         value={this.state.nic}
                                                         onChange={this.onChangenic}
                                                     />
+                                                     <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.nicError}</p>
                                                 </div>
                                             </div>
 
@@ -215,11 +220,12 @@ export class CreateInstructor extends Component {
 
                                                 <div class="">
                                                     <label className='block text-lg font-medium text-gray-900 dark:text-white' >
-                                                        Date Of Birth :
+                                                        Date Of Birth
                                                     </label>
                                                     <div>
                                                         <DatePicker
                                                             viewBox="0 0 20 40"
+                                                            required
                                                             selected={this.state.dob}
                                                             onChange={this.onChangedob}
                                                         />
@@ -228,7 +234,7 @@ export class CreateInstructor extends Component {
                                                 </div>
                                                 <div className="form-group">
                                                     <label for="large-input" className='block text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Contact Number :
+                                                        Contact Number
                                                     </label>
                                                     <input type="text"
                                                         required
@@ -237,26 +243,27 @@ export class CreateInstructor extends Component {
                                                         value={this.state.contactNo}
                                                         onChange={this.onChangecontactNo}
                                                     />
-                                                    <p className="validateMsg">{this.state.contactError}</p>
+                                                    <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.contactError}</p>
                                                 </div>
 
                                             </div>
                                             <div className="form-group">
                                                 <label className='block text-lg font-medium text-gray-900 dark:text-white'>
-                                                    Email :
+                                                    Email
                                                 </label>
-                                                <input type="text"
+                                                <input type="email"
                                                     required
                                                     placeholder='example@example.com'
                                                     class="mb-1 form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     value={this.state.email}
                                                     onChange={this.onChangeemail}
                                                 />
+                                                <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.emailError}</p>
                                             </div>
 
                                             <div className="form-group">
                                                 <label for="large-input" className='block text-lg font-medium text-gray-900 dark:text-white'>
-                                                    Address :
+                                                    Address
                                                 </label>
                                                 <input type="text"
                                                     required
@@ -269,7 +276,7 @@ export class CreateInstructor extends Component {
 
                                             <div className="form-group ">
                                                 <label className='block text-lg font-medium text-gray-900 dark:text-white'>
-                                                    Position :
+                                                    Position
                                                 </label>
                                                 <input type="text"
                                                     required
@@ -281,7 +288,7 @@ export class CreateInstructor extends Component {
 
                                             <div className="form-group">
                                                 <label className='block text-lg font-medium text-gray-900 dark:text-white'>
-                                                    Password :
+                                                    Password
                                                 </label>
                                                 <input type="password"
                                                     required
@@ -294,7 +301,7 @@ export class CreateInstructor extends Component {
 
                                             <div className="form-group">
                                                 <label className='block text-lg font-medium text-gray-900 dark:text-white'>
-                                                    Confirm Passowrd :
+                                                    Confirm Passowrd
                                                 </label>
                                                 <input type="password"
                                                     required
@@ -302,7 +309,7 @@ export class CreateInstructor extends Component {
                                                     value={this.state.cpassword}
                                                     onChange={this.onChangecpassword}
                                                 />
-                                                <p className="validateMsg">{this.state.passwordError}</p>
+                                                <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.passwordError}</p>
                                             </div><p />
 
                                             <div className="m-5 text-center align-middle form-group">

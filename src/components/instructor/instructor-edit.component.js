@@ -125,14 +125,6 @@ export default class EditInstructor extends Component {
         });
     }
 
-    // handleChange = (event) => {
-    //     event.preventDefault();
-
-    //     this.setState({
-    //         [event.target.name]: event.target.value
-    //     })
-    // }
-
     onSubmit(e) {
         e.preventDefault();
         const instructor = {
@@ -148,6 +140,12 @@ export default class EditInstructor extends Component {
         }
 
         console.log(instructor);
+
+        const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+        if(!this.state.email || regex.test(this.state.email) === false){
+            this.setState({ emailError: "Please Enter a valid email." })
+        }
         if (this.state.password != this.state.cpassword) {
             this.setState({ passwordError: "Your Passwords Don't match" })
 
@@ -167,24 +165,24 @@ export default class EditInstructor extends Component {
                         Swal.fire({
                             icon: 'success',
                             title: 'Successful',
-                            text: 'Instructor has been added!!',
+                            text: 'Instructor has been Updated!!',
                             background: '#fff',
-                            confirmButtonColor: '#333533',
+                            confirmButtonColor: '#0a5bf2',
                             iconColor: '#60e004'
                         })
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Error in adding!',
+                            text: 'Error in Updating!',
                             background: '#fff',
-                            confirmButtonColor: '#333533',
+                            confirmButtonColor: '#eb220c',
                             iconColor: '#e00404'
                         })
                     }
                 })
         }
-        // window.location = '/';
+        
     }
 
     render() {
@@ -201,10 +199,10 @@ export default class EditInstructor extends Component {
                                             <div class="grid grid-cols-2 gap-4 form-group">
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Full Name :
+                                                        Full Name
                                                     </label>
                                                     <input type="text"
-                                                        // required
+                                                        required
                                                         className="form-control"
                                                         value={fullName}
                                                         onChange={this.onChangefullName}
@@ -215,7 +213,7 @@ export default class EditInstructor extends Component {
                                             <div class="grid grid-cols-2 gap-4 form-group">
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        NIC :
+                                                        NIC
                                                     </label>
                                                     <input type="text"
                                                         required
@@ -223,15 +221,16 @@ export default class EditInstructor extends Component {
                                                         value={nic}
                                                         onChange={this.onChangenic}
                                                     />
-                                                    <p />
+                                                    <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.nicError}</p>
                                                 </div>
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Date of birth :
+                                                        Date of birth
                                                     </label>
                                                     <DatePicker
                                                         type="date"
                                                         className="text-lg text-gray-900'"
+                                                        required
                                                         selected={dob}
                                                         onChange={this.onChangedob}
                                                     /><p />
@@ -240,29 +239,29 @@ export default class EditInstructor extends Component {
 
                                             <div className="form-group">
                                                 <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                    Contact Number :
+                                                    Contact Number
                                                 </label>
                                                 <input type="text"
                                                     required
                                                     className="form-control"
                                                     value={contactNo}
                                                     onChange={this.onChangecontactNo}
-                                                /><p />
+                                                /> <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.contactError}</p>
                                             </div>
                                             <div className="form-group">
                                                 <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                    Email :
+                                                    Email
                                                 </label>
                                                 <input type="email"
                                                     required
                                                     className="form-control"
                                                     value={email}
                                                     onChange={this.onChangeemail}
-                                                /><p />
+                                                /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.emailError}</p>
                                             </div>
                                             <div className="form-group">
                                                 <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
-                                                    Address :
+                                                    Address
                                                 </label>
                                                 <input
                                                     type="text"
@@ -274,7 +273,7 @@ export default class EditInstructor extends Component {
                                             </div>
                                             <div className="form-group">
                                                 <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
-                                                    Position :
+                                                    Position
                                                 </label>
                                                 <input
                                                     type="text"
@@ -286,7 +285,7 @@ export default class EditInstructor extends Component {
                                             </div>
                                             <div className="form-group">
                                                 <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
-                                                    Passowrd :
+                                                    Passowrd
                                                 </label>
                                                 <input
                                                     disabled
@@ -299,7 +298,7 @@ export default class EditInstructor extends Component {
                                             </div>
                                             <div className="form-group">
                                                 <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">
-                                                    Confirm Passowrd :
+                                                    Confirm Passowrd
                                                 </label>
                                                 <input
                                                     disabled
@@ -308,7 +307,7 @@ export default class EditInstructor extends Component {
                                                     className="form-control"
                                                     value={cpassword}
                                                     onChange={this.onChangecpassword}
-                                                /><p />
+                                                /> <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.passwordError}</p>
                                             </div>
                                             <div className="text-center align-middle form-group">
                                                 <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Update Instructor" />

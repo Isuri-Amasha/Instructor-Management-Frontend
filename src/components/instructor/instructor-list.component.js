@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import * as Swal from "sweetalert2";
+import Swal from "sweetalert2";
 import { Modal } from "react-bootstrap";
 import InstructorEdit from "./instructor-edit.component";
 
@@ -16,8 +16,7 @@ const Instructor = props => (
         <td className='px-6 py-4 '>{props.instructor.email}</td>
         <td className='px-6 py-4 '>{props.instructor.address}</td>
         <td className='px-6 py-4 '>{props.instructor.position}</td>
-        {/* <td className='px-6 py-4 '>{props.instructor.password}</td>
-        <td className='px-6 py-4 '>{props.instructor.cpassword}</td> */}
+      
         <td className='px-6 py-4 '>
             <div class="flex justify-center">
                 <div class="">
@@ -91,44 +90,42 @@ export class InstructorList extends Component {
     }
 
     deleteInstructor(id) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Are you sure?',
-            text: "Once deleted, you will not be able to recover this record!",
-            background: '#fff',
-            confirmButtonColor: '#454545',
-            iconColor: '#ffc200',
-            showCancelButton: true,
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete'
-        })
-            .then((willDelete) => {
-                if (willDelete.isConfirmed) {
+        
                     axios.delete('http://localhost:5000/instructor/' + id).then(response => {
-                        console.log(response.data)
+                        console.log(response.status)
+                        // this.refreshTable();
+
+                        if(response.status == 200){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Successful',
+                                text: "Instructor has been deleted!!",
+                                background: '#fff',
+                                confirmButtonColor: '#0a5bf2',
+                                iconColor: '#60e004'
+                            })
+
+                           
+                        }
+                        
+                        else {
+                            Swal.fire({
+                                icon: 'Unsuccess',
+                                title: 'Unsuccessfull',
+                                text: "Istructor has not been deleted!!",
+                                background: '#fff',
+                                confirmButtonColor: '#eb220c',
+                                iconColor: '#60e004'
+                            })
+                        }
+
                         this.refreshTable();
                     })
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successful',
-                        text: "User has been deleted!!",
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#60e004'
-                    })
-                }
-                else {
-                    Swal.fire({
-                        icon: 'Unsuccess',
-                        title: 'Unsuccessfull',
-                        text: "User has not been deleted!!",
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#60e004'
-                    })
-                }
-            });
+                    
+            
     }
+
+   
 
     instructorList() {
         return this.state.instructor.map(currentinstructor => {
@@ -178,33 +175,8 @@ export class InstructorList extends Component {
                                             className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-red-500 rounded-md hover:bg-red-200'
                                             onClick={() => {
                                                 //Delete the selected record
-                                                Swal.fire({
-                                                    icon: 'warning',
-                                                    title: 'Are you sure?',
-                                                    text: "Once deleted, you will not be able to recover this record!",
-                                                    background: '#fff',
-                                                    confirmButtonColor: '#454545',
-                                                    iconColor: '#ffc200',
-                                                    showCancelButton: true,
-                                                    cancelButtonColor: '#d33',
-                                                    confirmButtonText: 'Delete'
-                                                })
-                                                    .then((willDelete) => {
-                                                        if (willDelete.isConfirmed) {
-                                                            axios.delete('http://localhost:5000/instructor/' + currentinstructor._id).then(response => {
-                                                                console.log(response.data)
-                                                                this.refreshTable();
-                                                            })
-                                                            Swal.fire({
-                                                                icon: 'success',
-                                                                title: 'Successful',
-                                                                text: "User has been deleted!!",
-                                                                background: '#fff',
-                                                                confirmButtonColor: '#333533',
-                                                                iconColor: '#60e004'
-                                                            })
-                                                        }
-                                                    });
+                                                this.deleteInstructor(currentinstructor._id)
+                                                
                                             }}>
                                             <div class="">
                                                 <svg class="h-5 w-5 mr-2 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -234,7 +206,7 @@ export class InstructorList extends Component {
         const marginLeft = 40;
         const doc = new jsPDF(orientation, unit, size);
         const title = "Instructor List Report ";
-        const headers = [["Full Name", "NIC", "Date Of Birth", "Contact Number", "Email", "Address", "Position", "Password", "Confirm Password"]];
+        const headers = [["Full Name", "NIC", "Date Of Birth", "Contact Number", "Email", "Address", "Position"]];
         const inst = this.state.instructor.map(
             Instructor => [
                 Instructor.fullName,
@@ -244,8 +216,6 @@ export class InstructorList extends Component {
                 Instructor.email,
                 Instructor.address,
                 Instructor.position,
-                // Instructor.password,
-                // Instructor.cpassword,
             ]
         );
 
@@ -328,8 +298,6 @@ export class InstructorList extends Component {
                                             <th className="p-2 tbhead">Email</th>
                                             <th className="p-2 tbhead">Address</th>
                                             <th className="p-2 tbhead">Position</th>
-                                            {/* <th className="p-2 tbhead">Password</th>
-                                            <th className="p-2 tbhead">Confirm Password</th> */}
                                             <th className="p-2 text-center tbhead">Actions</th>
                                         </tr>
                                     </thead>
