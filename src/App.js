@@ -16,6 +16,8 @@ import {CreateFeedback} from './components/feedback/feedback-add.component'
 import EditFeedback from './components/feedback/feedback-edit.component'
 
 import {InstructorDetails} from './components/instructor/instructor-details.component'
+import Home from './components/home.component';
+
 function App() {
   return (
 
@@ -24,6 +26,7 @@ function App() {
       <Router>
         <Routes>
 
+        <Route exact path = "/" element = {<Home/>}/>
         <Route exact path = "/instructor" element = {<InstructorList/>}/>
         <Route exact path = "/creatInstructor" element = {<CreateInstructor/>}/>
         <Route exact path = "/editInstructor/:id" element = {EditInstructor}/>
